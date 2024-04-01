@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState} from 'react';
 import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
 import type {PropsWithChildren} from 'react';
@@ -22,6 +22,9 @@ import {
   Button
 } from 'react-native';
 
+
+
+
 import {
   Colors,
   DebugInstructions,
@@ -33,6 +36,8 @@ import {
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
+
+
 
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -67,14 +72,17 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+function App() {
+  const [tasks, setTasks] = useState(['Do laundry', 'Go to gym', 'Walk dog']);
+
   return (
-          <View>
-            <ToDoList />
-            <ToDoForm/>
-          </View>
+    <div>
+      <ToDoForm />
+      <ToDoList tasks = {tasks} />
+      <ToDoList/>
+    </div>
   );
+};
 }
-
-
 
 export default App;
